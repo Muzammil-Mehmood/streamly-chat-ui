@@ -14,7 +14,7 @@ export const useStreamingChat = () => {
   const [isLoading, setIsLoading] = useState(false);
   const abortControllerRef = useRef<AbortController | null>(null);
 
-  const sendMessage = useCallback(async (messageText: string, apiEndpoint: string = 'http://localhost:8002/chat') => {
+  const sendMessage = useCallback(async (messageText: string, apiEndpoint: string = 'https://81ec-2401-ba80-ac91-abb-39f5-d351-7102-e200.ngrok-free.app/chat') => {
     if (isLoading) return;
 
     // Add user message
@@ -49,6 +49,7 @@ export const useStreamingChat = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': 'true',
         },
         body: JSON.stringify({ 
           data: messageText 
