@@ -44,7 +44,7 @@ export const useStreamingChat = () => {
 
       setMessages(prev => [...prev, initialBotMessage]);
 
-      // Make API request
+      // Make API request with correct format
       const response = await fetch(apiEndpoint, {
         method: 'POST',
         headers: {
@@ -52,6 +52,7 @@ export const useStreamingChat = () => {
           'ngrok-skip-browser-warning': 'true',
         },
         body: JSON.stringify({ 
+          messages: [{ role: "user", content: messageText }],
           data: messageText 
         }),
         signal: abortControllerRef.current.signal,
